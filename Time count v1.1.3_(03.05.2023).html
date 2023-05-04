@@ -1,0 +1,649 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Time count v1.1.2</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			background-color: #DCDCDC;
+		}
+
+		.title {
+			height: 50px;
+			margin: 10px 0;
+			text-align: center;
+		}
+
+		.container {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			gap: 10px;
+		}
+
+		div#messageArea {
+			color: dodgerblue;
+			font-weight: bold;
+			font-size: xx-large;
+		}
+
+		div#messageAreaMin {
+			color: dodgerblue;
+			font-weight: bold;
+			font-size: xx-large;
+		}
+
+		.table {
+			border-spacing: 2px;
+			background-color: lightblue;
+		}
+
+		td {
+			width: 100px;
+			height: 25px;
+			border-spacing: 2px;
+			background-color: white;
+			text-align: center;
+		}
+
+		.handlers {
+			min-height: 100%;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.forms {
+			margin-bottom: 50px;
+		}
+
+		form {
+			padding: 2px;
+			background-color: lightblue;
+		}
+
+		input {
+			width: 98px;
+			text-align: center;
+			background-color: white;
+			border-color: dodgerblue;
+			font-size: 0.85rem;
+		}
+
+		.producedBy {
+			margin-top: auto;
+			color: blue;
+			font-weight: bold;
+			font-size: x-large;
+		}
+
+		.tooltip {
+			position: fixed;
+			padding: 10px 20px;
+			/* красивости... */
+
+			border: 2px solid lightblue;
+			border-radius: 4px;
+			text-align: center;
+			font: italic 14px/1.3 sans-serif;
+			color: #333;
+			background: #fff;
+			box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+		}
+	</style>
+</head>
+
+<body>
+	<h1 class="title">ПОДСЧЕТ РАБОЧЕГО ВРЕМЕНИ</h1>
+	<div class="container">
+		<table class="table">
+			<tr>
+				<td id="na4" data-tooltip="Время начала работы">Время начала</td>
+				<td id="konec" data-tooltip="Время окончания работы">Время окончания</td>
+				<td id="resu" data-tooltip="Посчитанное чистое время работы">Результат</td>
+				<td id="resuMin" data-tooltip="Результат подсчета в минутах">Минуты</td>
+			</tr>
+			<tr>
+				<td id="0"></td>
+				<td id="50"></td>
+				<td id="80"></td>
+				<td id="110"></td>
+			</tr>
+			<tr>
+				<td id="1"></td>
+				<td id="51"></td>
+				<td id="81"></td>
+				<td id="111"></td>
+
+			</tr>
+			<tr>
+				<td id="2"></td>
+				<td id="52"></td>
+				<td id="82"></td>
+				<td id="112"></td>
+			</tr>
+			<tr>
+				<td id="3"></td>
+				<td id="53"></td>
+				<td id="83"></td>
+				<td id="113"></td>
+			</tr>
+			<tr>
+				<td id="4"></td>
+				<td id="54"></td>
+				<td id="84"></td>
+				<td id="114"></td>
+			</tr>
+			<tr>
+				<td id="5"></td>
+				<td id="55"></td>
+				<td id="85"></td>
+				<td id="115"></td>
+			</tr>
+			<tr>
+				<td id="6"></td>
+				<td id="56"></td>
+				<td id="86"></td>
+				<td id="116"></td>
+			</tr>
+			<tr>
+				<td id="7"></td>
+				<td id="57"></td>
+				<td id="87"></td>
+				<td id="117"></td>
+			</tr>
+			<tr>
+				<td id="8"></td>
+				<td id="58"></td>
+				<td id="88"></td>
+				<td id="118"></td>
+			</tr>
+			<tr>
+				<td id="9"></td>
+				<td id="59"></td>
+				<td id="89"></td>
+				<td id="119"></td>
+			</tr>
+			<tr>
+				<td id="10"></td>
+				<td id="60"></td>
+				<td id="90"></td>
+				<td id="120"></td>
+			</tr>
+			<tr>
+				<td id="11"></td>
+				<td id="61"></td>
+				<td id="91"></td>
+				<td id="121"></td>
+			</tr>
+			<tr>
+				<td id="12"></td>
+				<td id="62"></td>
+				<td id="92"></td>
+				<td id="122"></td>
+			</tr>
+			<tr>
+				<td id="13"></td>
+				<td id="63"></td>
+				<td id="93"></td>
+				<td id="123"></td>
+			</tr>
+			<tr>
+				<td id="14"></td>
+				<td id="64"></td>
+				<td id="94"></td>
+				<td id="124"></td>
+			</tr>
+			<tr>
+				<td id="15"></td>
+				<td id="65"></td>
+				<td id="95"></td>
+				<td id="125"></td>
+			</tr>
+			<tr>
+				<td id="16"></td>
+				<td id="66"></td>
+				<td id="96"></td>
+				<td id="126"></td>
+			</tr>
+			<tr>
+				<td id="17"></td>
+				<td id="67"></td>
+				<td id="97"></td>
+				<td id="127"></td>
+			</tr>
+			<tr>
+				<td id="18"></td>
+				<td id="68"></td>
+				<td id="98"></td>
+				<td id="128"></td>
+			</tr>
+			<tr>
+				<td id="19"></td>
+				<td id="69"></td>
+				<td id="99"></td>
+				<td id="129"></td>
+			</tr>
+			<tr>
+				<td id="20"></td>
+				<td id="70"></td>
+				<td id="100"></td>
+				<td id="130"></td>
+			</tr>
+			<tr>
+				<td id="21"></td>
+				<td id="71"></td>
+				<td id="101"></td>
+				<td id="131"></td>
+			</tr>
+			<tr>
+				<td id="22"></td>
+				<td id="72"></td>
+				<td id="102"></td>
+				<td id="132"></td>
+			</tr>
+			<tr>
+				<td id="23"></td>
+				<td id="73"></td>
+				<td id="103"></td>
+				<td id="133"></td>
+			</tr>
+			<tr>
+				<td id="24"></td>
+				<td id="74"></td>
+				<td id="104"></td>
+				<td id="134"></td>
+			</tr>
+			<tr>
+				<td id="" color="black" colspan='2'>Общее время</td>
+				<td id="itog"></td>
+				<td id="itogMin"></td>
+			</tr>
+		</table>
+		<div class="handlers">
+			<div class="forms">
+				<form id="form">
+					<input type="text" id="timeInput" placeholder="00.00" autofocus>
+					<input type="button" data-tooltip="Укажите время начала работы" id="fire" value="Вр. начала">
+					<input type="text" id="timeInput1" placeholder="00.00">
+					<input type="button" data-tooltip="Укажите время <br>окончания работы" id="fire1"
+						value="Вр. окончания">
+				</form>
+				<form id="form1">
+					<input type="text" id="timeInput2" placeholder="00.00">
+					<input type="button" data-tooltip="Укажите чистое <br>время работы" id="fire2" value="Результат">
+					<input type="button" data-tooltip="Формы ввода вверху" id="zapuskButtUp" value="▲">
+					<input type="button" data-tooltip="Формы <br>ввода внизу" id="zapuskButtDown" value="▼">
+				</form>
+			</div>
+			<div id="messageArea"></div>
+			<div id="messageAreaMin"></div>
+			<div class="producedBy">by AoD & Foxonom</div>
+		</div>
+	</div>
+	<script>
+window.onload = init;
+var x = 0;
+var y = 50;
+var r = 80;
+var c = 80;
+var count = 0;
+var result = 0;
+var resultMin = 0;
+var showingTooltip;
+var place = 70;
+
+//nazna4aem sobitiya pri najatii knopok
+function init() {
+    var fireButton = document.getElementById("fire");
+    fireButton.onclick = zapusk;
+    var fireButton1 = document.getElementById("fire1");
+    fireButton1.onclick = zapusk1;
+    var fireButton2 = document.getElementById("fire2");
+    fireButton2.onclick = zapusk2;
+    var zapuskButtDown = document.getElementById("zapuskButtDown");
+    zapuskButtDown.onclick = zapuskButtD;
+    var zapuskButtUp = document.getElementById("zapuskButtUp");
+    zapuskButtUp.onclick = zapuskButtU;
+    var enter = document.getElementById('timeInput');
+    timeInput.onkeypress = zapuskEnter;
+    var enter1 = document.getElementById('timeInput1');
+    timeInput1.onkeypress = zapuskEnter1;
+    var enter2 = document.getElementById('timeInput2');
+    timeInput2.onkeypress = zapuskEnter2;
+    thirdNull();
+    fResult();
+};
+
+//Функция отсеивания некорректного ввода
+function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
+//Функции ввода через Энтер
+function zapuskEnter(e) {
+    var fireButton = document.getElementById("fire");
+    if (e.keyCode === 13) {
+        fireButton.click();
+        return false;
+    }
+};
+function zapuskEnter1(e) {
+    var fireButton = document.getElementById("fire1");
+    if (e.keyCode === 13) {
+        fireButton.click();
+        return false;
+    }
+};
+function zapuskEnter2(e) {
+    var fireButton = document.getElementById("fire2");
+    if (e.keyCode === 13) {
+        fireButton.click();
+        return false;
+    }
+};
+
+//sobitiya pri najatii knopok, zapis v tablicy
+function zapusk() {
+    var tap = document.getElementById("timeInput");
+    var input = tap.value;
+    if (isNumeric(input)) {
+        if (input < 0) {
+            input = input * (-1);
+        };
+        var countCeloe = parseInt(input);
+        var countDrobnoe = Math.round((input - countCeloe) * 100) / 100;
+        while (Math.round(countDrobnoe * 100) / 100 >= 0.60) {
+            countCeloe++;
+            countDrobnoe = Math.round((countDrobnoe - 0.60) * 100) / 100;
+        }
+        if (Math.round(countDrobnoe * 100) / 100 < 0.60) {
+            input = countCeloe + parseInt(countDrobnoe * 100) / 100;
+        };
+        document.getElementById(x).innerHTML = input;
+        tap.value = "";
+        countObj();
+        x++;
+        console.log(x);
+        fResult();
+    }
+    else {
+        alert("Некорректный ввод. Правильный пример -  22.10");
+        tap.value = "";
+    }
+};
+
+function zapusk1() {
+    var tap = document.getElementById("timeInput1");
+    var input = tap.value;
+    if (isNumeric(input)) {
+        if (input < 0) {
+            input = input * (-1);
+        };
+        var countCeloe = parseInt(input);
+        var countDrobnoe = Math.round((input - countCeloe) * 100) / 100;
+        while (Math.round(countDrobnoe * 100) / 100 >= 0.60) {
+            countCeloe++;
+            countDrobnoe = Math.round((countDrobnoe - 0.60) * 100) / 100;
+        }
+        if (Math.round(countDrobnoe * 100) / 100 < 0.60) {
+            input = countCeloe + parseInt(countDrobnoe * 100) / 100;
+        };
+        document.getElementById(y).innerHTML = input;
+        tap.value = "";
+        countObj();
+        y++;
+        r++;
+        fResult();
+    }
+    else {
+        alert("Некорректный ввод. Правильный пример -  22.10");
+        tap.value = "";
+    }
+};
+
+
+function zapusk2() {
+    var tap = document.getElementById("timeInput2");
+    var input = tap.value;
+    if (isNumeric(input)) {
+        if (input < 0) {
+            input = input * (-1);
+        };
+        var countCeloe = parseInt(input);
+        var countDrobnoe = Math.round((input - countCeloe) * 100) / 100;
+        while (Math.round(countDrobnoe * 100) / 100 >= 0.60) {
+            countCeloe++;
+            countDrobnoe = Math.round((countDrobnoe - 0.60) * 100) / 100;
+        }
+        if (Math.round(countDrobnoe * 100) / 100 < 0.60) {
+            input = countCeloe + parseInt(countDrobnoe * 100) / 100;
+        }
+        document.getElementById(r).innerHTML = input;
+        var inputMin = Math.round(countCeloe * 60 + countDrobnoe * 100);
+        document.getElementById(30 + r).innerHTML = inputMin;
+        tap.value = "";
+        x++;
+        y++;
+        r++;
+        fResult();
+    }
+    else {
+        alert("Некорректный ввод. Правильный пример -  22.10");
+        tap.value = "";
+    }
+};
+
+//Button down and up enter border  
+function zapuskButtD() {
+    document.getElementById("form").style.top = "800px";
+    document.getElementById("form1").style.top = "825px";
+};
+function zapuskButtU() {
+    document.getElementById("form").style.top = "70px";
+    document.getElementById("form1").style.top = "95px";
+};
+
+
+//функция подсчета x-50+x
+function countObj() {
+    for (let x = 0; x < 25; x++) {
+        var first = document.getElementById(x).innerHTML;
+        var second = document.getElementById(50 + x).innerHTML;
+        var third = document.getElementById(80 + x).innerHTML;
+        var fourth = document.getElementById(110 + x).innerHTML;
+        if (third == "0") {
+            var h = 0, m = 0;
+            var hsFirst = parseInt(first) * 3600;
+            var hsSecond = parseInt(second) * 3600;
+            var msFirst = (Math.round((first - parseInt(first)) * 100)) * 60;
+            var msSecond = (Math.round((second - parseInt(second)) * 100)) * 60;
+            var res = (hsSecond - hsFirst) + (msSecond - msFirst);
+            if (res < 0) {
+                res = res * (-1);
+            };
+            var resultMin = (res / 60);
+            while (res >= 3600) {
+                h++;
+                res = res - 3600;
+            }
+            if (res < 3600) {
+                m = (res / 60) / 100;
+            }
+            count = Math.round((h + m) * 100) / 100;
+            document.getElementById(80 + x).innerHTML = count;
+            document.getElementById(110 + x).innerHTML = resultMin;
+            fResult();
+        }
+    };
+    if (third !== "0") {
+        x++
+    };
+};
+
+//Создаем нули в третьем столбце и четвертом
+function thirdNull() {
+    for (let x = 0; x < 25; x++) {
+        document.getElementById(80 + x).innerHTML = 0;
+        document.getElementById(110 + x).innerHTML = 0;
+        fResult();
+    }
+};
+
+//функция подсчета всех результатов		
+function fResult() {
+    var c0 = document.getElementById(80).innerHTML;
+    var c1 = document.getElementById(81).innerHTML;
+    var c2 = document.getElementById(82).innerHTML;
+    var c3 = document.getElementById(83).innerHTML;
+    var c4 = document.getElementById(84).innerHTML;
+    var c5 = document.getElementById(85).innerHTML;
+    var c6 = document.getElementById(86).innerHTML;
+    var c7 = document.getElementById(87).innerHTML;
+    var c8 = document.getElementById(88).innerHTML;
+    var c9 = document.getElementById(89).innerHTML;
+    var c10 = document.getElementById(90).innerHTML;
+    var c11 = document.getElementById(91).innerHTML;
+    var c12 = document.getElementById(92).innerHTML;
+    var c13 = document.getElementById(93).innerHTML;
+    var c14 = document.getElementById(94).innerHTML;
+    var c15 = document.getElementById(95).innerHTML;
+    var c16 = document.getElementById(96).innerHTML;
+    var c17 = document.getElementById(97).innerHTML;
+    var c18 = document.getElementById(98).innerHTML;
+    var c19 = document.getElementById(99).innerHTML;
+    var c20 = document.getElementById(101).innerHTML;
+    var c21 = document.getElementById(102).innerHTML;
+    var c22 = document.getElementById(103).innerHTML;
+    var c23 = document.getElementById(104).innerHTML;
+
+    var h = 0, m = 0;
+    var hs0 = parseInt(c0) * 3600;
+    var hs1 = parseInt(c1) * 3600;
+    var hs2 = parseInt(c2) * 3600;
+    var hs3 = parseInt(c3) * 3600;
+    var hs4 = parseInt(c4) * 3600;
+    var hs5 = parseInt(c5) * 3600;
+    var hs6 = parseInt(c6) * 3600;
+    var hs7 = parseInt(c7) * 3600;
+    var hs8 = parseInt(c8) * 3600;
+    var hs9 = parseInt(c9) * 3600;
+    var hs10 = parseInt(c10) * 3600;
+    var hs11 = parseInt(c11) * 3600;
+    var hs12 = parseInt(c12) * 3600;
+    var hs13 = parseInt(c13) * 3600;
+    var hs14 = parseInt(c14) * 3600;
+    var hs15 = parseInt(c15) * 3600;
+    var hs16 = parseInt(c16) * 3600;
+    var hs17 = parseInt(c17) * 3600;
+    var hs18 = parseInt(c18) * 3600;
+    var hs19 = parseInt(c19) * 3600;
+    var hs20 = parseInt(c20) * 3600;
+    var hs21 = parseInt(c21) * 3600;
+    var hs22 = parseInt(c22) * 3600;
+    var hs23 = parseInt(c23) * 3600;
+
+    var ms0 = (Math.round((c0 - parseInt(c0)) * 100)) * 60;
+    var ms1 = (Math.round((c1 - parseInt(c1)) * 100)) * 60;
+    var ms2 = (Math.round((c2 - parseInt(c2)) * 100)) * 60;
+    var ms3 = (Math.round((c3 - parseInt(c3)) * 100)) * 60;
+    var ms4 = (Math.round((c4 - parseInt(c4)) * 100)) * 60;
+    var ms5 = (Math.round((c5 - parseInt(c5)) * 100)) * 60;
+    var ms6 = (Math.round((c6 - parseInt(c6)) * 100)) * 60;
+    var ms7 = (Math.round((c7 - parseInt(c7)) * 100)) * 60;
+    var ms8 = (Math.round((c8 - parseInt(c8)) * 100)) * 60;
+    var ms9 = (Math.round((c9 - parseInt(c9)) * 100)) * 60;
+    var ms10 = (Math.round((c10 - parseInt(c10)) * 100)) * 60;
+    var ms11 = (Math.round((c11 - parseInt(c11)) * 100)) * 60;
+    var ms12 = (Math.round((c12 - parseInt(c12)) * 100)) * 60;
+    var ms13 = (Math.round((c13 - parseInt(c13)) * 100)) * 60;
+    var ms14 = (Math.round((c14 - parseInt(c14)) * 100)) * 60;
+    var ms15 = (Math.round((c15 - parseInt(c15)) * 100)) * 60;
+    var ms16 = (Math.round((c16 - parseInt(c16)) * 100)) * 60;
+    var ms17 = (Math.round((c17 - parseInt(c17)) * 100)) * 60;
+    var ms18 = (Math.round((c18 - parseInt(c18)) * 100)) * 60;
+    var ms19 = (Math.round((c19 - parseInt(c19)) * 100)) * 60;
+    var ms20 = (Math.round((c20 - parseInt(c20)) * 100)) * 60;
+    var ms21 = (Math.round((c21 - parseInt(c21)) * 100)) * 60;
+    var ms22 = (Math.round((c22 - parseInt(c22)) * 100)) * 60;
+    var ms23 = (Math.round((c23 - parseInt(c23)) * 100)) * 60;
+
+    var res = (hs0 + hs1 + hs2 + hs3 + hs4 + hs5 + hs6 + hs7 + hs8 + hs9 + hs10 + hs11 + hs12 + hs13 + hs14 + hs15 + hs16 + hs17 + hs18 + hs19 + hs20 + hs21 + hs22 + hs23) + (ms0 + ms1 + ms2 + ms3 + ms4 + ms5 + ms6 + ms7 + ms8 + ms9 + ms10 + ms11 + ms12 + ms13 + ms14 + ms15 + ms16 + ms17 + ms18 + ms19 + ms20 + ms21 + ms22 + ms23);
+
+    resultMin = (res / 60);
+    while (res >= 3600) {
+        h++;
+        res = res - 3600;
+    }
+    if (res < 3600) {
+        m = (res / 60) / 100;
+    }
+    result = Math.round((h + m) * 100) / 100;
+    document.getElementById('itog').innerHTML = result;
+    document.getElementById('itogMin').innerHTML = resultMin;
+    view();
+};
+
+//funkciya pokaza значений на поле
+var view = function () {
+    var massageArea = document.getElementById("messageArea");
+    messageArea.innerHTML = result + " часов или";
+    var massageAreaMin = document.getElementById("messageAreaMin");
+    messageAreaMin.innerHTML = "" + resultMin + "  мин";
+
+}
+
+view();
+
+//Показ подсказки
+document.onmouseover = function (e) {
+    var target = e.target;
+
+    var tooltip = target.getAttribute('data-tooltip');
+    if (!tooltip) return;
+
+    var tooltipElem = document.createElement('div');
+    tooltipElem.className = 'tooltip';
+    tooltipElem.innerHTML = tooltip;
+    document.body.appendChild(tooltipElem);
+
+    var coords = target.getBoundingClientRect();
+
+    var left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) / 2;
+    if (left < 0) left = 0; // не вылезать за левую границу окна
+
+    var top = coords.top - tooltipElem.offsetHeight - 5;
+    if (top < 0) { // не вылезать за верхнюю границу окна
+        top = coords.top + target.offsetHeight + 5;
+    }
+
+    tooltipElem.style.left = left + 'px';
+    tooltipElem.style.top = top + 'px';
+
+    showingTooltip = tooltipElem;
+};
+
+document.onmouseout = function (e) {
+
+    if (showingTooltip) {
+        document.body.removeChild(showingTooltip);
+        showingTooltip = null;
+    }
+
+};
+
+
+// 1 странность ввода по ячейкам когда после 3й первая остается на месте и снова вводится напротив третьей  
+// 2 сохранение результатов
+// 3 выбор ячейки в которую вводить(новая кнопка)
+	</script>
+</body>
+
+</html>
