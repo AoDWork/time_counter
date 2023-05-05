@@ -1,7 +1,7 @@
 window.onload = init;
-var x = 0;
-var y = 50;
-var r = 80;
+var firstColumnPosition = 0;
+var secondColumnPosition = 50;
+var thirdColumnPosition = 80;
 var c = 80;
 var count = 0;
 var result = 0;
@@ -9,102 +9,100 @@ var resultMin = 0;
 var showingTooltip;
 var place = 70;
 
-//nazna4aem sobitiya pri najatii knopok
+// events on clicks
 function init() {
     var fireButton = document.getElementById("fire");
     fireButton.onclick = zapusk;
+
     var fireButton1 = document.getElementById("fire1");
     fireButton1.onclick = zapusk1;
+
     var fireButton2 = document.getElementById("fire2");
     fireButton2.onclick = zapusk2;
+
     var zapuskButtDown = document.getElementById("zapuskButtDown");
-    zapuskButtDown.onclick = zapuskButtD;
+    zapuskButtDown.onclick = onClickButtonDown;
+
     var zapuskButtUp = document.getElementById("zapuskButtUp");
-    zapuskButtUp.onclick = zapuskButtU;
-    var enter = document.getElementById('timeInput');
-    timeInput.onkeypress = zapuskEnter;
-    var enter1 = document.getElementById('timeInput1');
-    timeInput1.onkeypress = zapuskEnter1;
-    var enter2 = document.getElementById('timeInput2');
-    timeInput2.onkeypress = zapuskEnter2;
-    thirdNull();
-    fResult();
+    zapuskButtUp.onclick = onClickButtonUp;
+
+    // bind onEnterPress on inputs fields 
+    timeInput.onkeypress = onEnterPress;
+    timeInput1.onkeypress = onEnterPress;
+    timeInput2.onkeypress = onEnterPress;
+
+    setZero();
+    countAllResults();
 };
 
 
 // Clock
-let intervalID = setInterval(getTime, 1000);    
+let intervalID = setInterval(getTime, 1000);
 
-const addZero = (time) => {                     
-    if(time < 10) {
+const addZero = (time) => {
+    if (time < 10) {
         time = "0" + time
     }
     return time
 }
 
 function getTime() {
-    let date = new Date;
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
-    
     const timeElement = document.querySelector('.time')
 
-    function setTime(){
-        timeElement.innerText = addZero(hours) + ":" + addZero(minutes) +":" + addZero(seconds)
-    }
-    
-    setTime()
+    let date = new Date
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
+    let seconds = date.getSeconds()
+
+    timeElement.innerText = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds)
 }
 
 
 // Shift inputs forms to bottom
-function zapuskButtD() {
+function onClickButtonDown() {
     document.querySelector('.handlers').classList.add("reverseColumn")
     document.querySelector(".forms").classList.add("formsMargins")
     document.querySelector(".messageArea").classList.add("messageMarginOnBottom")
-    
+
 };
-function zapuskButtU() {
+function onClickButtonUp() {
     document.querySelector('.handlers').classList.remove("reverseColumn")
     document.querySelector(".forms").classList.remove("formsMargins")
     document.querySelector(".messageArea").classList.remove("messageMarginOnBottom")
 };
 
 
-//Функции ввода через Энтер
-function zapuskEnter(e) {
-    var fireButton = document.getElementById("fire");
-    if (e.keyCode === 13) {
-        fireButton.click();
-        return false;
+// enter button = click
+function onEnterPress(e) {
+    let buttons = document.querySelectorAll(".inputButton");
+    let ind = (e.target.id).slice(9)
+
+    if (ind == 0) {
+        ind = 0
     }
-};
-function zapuskEnter1(e) {
-    var fireButton = document.getElementById("fire1");
     if (e.keyCode === 13) {
-        fireButton.click();
-        return false;
-    }
-};
-function zapuskEnter2(e) {
-    var fireButton = document.getElementById("fire2");
-    if (e.keyCode === 13) {
-        fireButton.click();
+        buttons[ind].click();
         return false;
     }
 };
 
-//Функция отсеивания некорректного ввода
-function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
+
+// check valid input
+function IsValid(n) {
+    if (n.length > 5 || !(!isNaN(parseFloat(n)) && isFinite(n))  ) {
+        alert("Input invalid or too long. Valid - 22.10 , max. length - 5 symbols");
+        return false
+    } else {
+        return true;
+    }
 };
 
-//sobitiya pri najatii knopok, zapis v tablicy
+
+// on click events
 function zapusk() {
     var tap = document.getElementById("timeInput");
     var input = tap.value;
-    if (isNumeric(input)) {
+    if (IsValid(input)) {
         if (input < 0) {
             input = input * (-1);
         };
@@ -117,20 +115,19 @@ function zapusk() {
         if (Math.round(countDrobnoe * 100) / 100 < 0.60) {
             input = countCeloe + parseInt(countDrobnoe * 100) / 100;
         };
-        document.getElementById(x).innerText = input;
+        document.getElementById(firstColumnPosition).innerText = input;
         tap.value = "";
         countObj();
-        x++;
-        r++;
+        firstColumnPosition++;
+        thirdColumnPosition++;
 
-        if (r - 80 > x) {
-            r = 80 + x
+        if (thirdColumnPosition - 80 > firstColumnPosition) {
+            thirdColumnPosition = 80 + firstColumnPosition
         }
 
-        fResult();
+        countAllResults();
     }
     else {
-        alert("Некорректный ввод. Правильный пример -  22.10");
         tap.value = "";
     }
 };
@@ -138,7 +135,7 @@ function zapusk() {
 function zapusk1() {
     var tap = document.getElementById("timeInput1");
     var input = tap.value;
-    if (isNumeric(input)) {
+    if (IsValid(input)) {
         if (input < 0) {
             input = input * (-1);
         };
@@ -151,30 +148,28 @@ function zapusk1() {
         if (Math.round(countDrobnoe * 100) / 100 < 0.60) {
             input = countCeloe + parseInt(countDrobnoe * 100) / 100;
         };
-        document.getElementById(y).innerText = input;
+        document.getElementById(secondColumnPosition).innerText = input;
         tap.value = "";
         countObj();
-        y++;
-        r++
+        secondColumnPosition++;
+        thirdColumnPosition++
 
-        if ((r - 80) > (y - 50)) {
-            r = 80 + (y - 50)
+        if ((thirdColumnPosition - 80) > (secondColumnPosition - 50)) {
+            thirdColumnPosition = 80 + (secondColumnPosition - 50)
         }
 
-        fResult();
+        countAllResults();
     }
     else {
-        alert("Некорректный ввод. Правильный пример -  22.10");
         tap.value = "";
     }
 };
-
 
 function zapusk2() {
     var tap = document.getElementById("timeInput2");
     var input = tap.value;
 
-    if (isNumeric(input)) {
+    if (IsValid(input)) {
 
         if (input < 0) {
             input = input * (-1);
@@ -191,31 +186,30 @@ function zapusk2() {
             input = countCeloe + parseInt(countDrobnoe * 100) / 100;
         }
 
-        document.getElementById(r).innerText = input;
+        document.getElementById(thirdColumnPosition).innerText = input;
         var inputMin = Math.round(countCeloe * 60 + countDrobnoe * 100);
-        document.getElementById(30 + r).innerText = inputMin;
+        document.getElementById(30 + thirdColumnPosition).innerText = inputMin;
         tap.value = "";
-        x++;
-        y++;
-        r++;
+        firstColumnPosition++;
+        secondColumnPosition++;
+        thirdColumnPosition++;
 
-        if (x < (r - 80)) {
-            x = r - 80
+        if (firstColumnPosition < (thirdColumnPosition - 80)) {
+            firstColumnPosition = thirdColumnPosition - 80
         }
 
-        if ((y - 50) < (r - 80)) {
-            y = 50 + (r - 80)
+        if ((secondColumnPosition - 50) < (thirdColumnPosition - 80)) {
+            secondColumnPosition = 50 + (thirdColumnPosition - 80)
         }
 
-        fResult();
+        countAllResults();
     } else {
-        alert("Некорректный ввод. Правильный пример -  22.10");
         tap.value = "";
     }
 };
 
 
-//функция подсчета x-50+x
+// count logic
 function countObj() {
     for (let x = 0; x < 25; x++) {
         var first = document.getElementById(x).innerText;
@@ -245,7 +239,7 @@ function countObj() {
             count = Math.round((h + m) * 100) / 100;
             document.getElementById(80 + x).innerText = count;
             document.getElementById(110 + x).innerText = resultMin;
-            fResult();
+            countAllResults();
         }
     };
     if (third !== "0") {
@@ -253,18 +247,19 @@ function countObj() {
     };
 };
 
-//Создаем нули в третьем столбце и четвертом
-function thirdNull() {
+// set zero to 3/4 cell on init
+function setZero() {
     for (let x = 0; x < 25; x++) {
         document.getElementById(80 + x).innerText = 0;
         document.getElementById(110 + x).innerText = 0;
-        fResult();
+        countAllResults();
     }
 };
 
-//функция подсчета всех результатов		
-function fResult() {
-    var c0 = document.getElementById(80).innerText;
+// counter all results	
+function countAllResults() {
+
+    let c0 = document.getElementById(80).innerText;
     var c1 = document.getElementById(81).innerText;
     var c2 = document.getElementById(82).innerText;
     var c3 = document.getElementById(83).innerText;
@@ -356,12 +351,12 @@ function fResult() {
     view();
 };
 
-//funkciya pokaza значений на поле
+// view results 
 var view = function () {
     var massageArea = document.getElementById("messageArea");
-    massageArea.innerText = result + " часов или";
+    massageArea.innerText = "Hours : " + result;
     var massageAreaMin = document.getElementById("messageAreaMin");
-    massageAreaMin.innerText = "" + resultMin + "  мин";
+    massageAreaMin.innerText = "Min. : " + resultMin;
 
 }
 
@@ -381,11 +376,13 @@ document.onmouseover = function (e) {
 
     var coords = target.getBoundingClientRect();
 
+    // dont cross left border of window
     var left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) / 2;
-    if (left < 0) left = 0; // не вылезать за левую границу окна
+    if (left < 0) left = 0;
 
+    // dont cross top border of window
     var top = coords.top - tooltipElem.offsetHeight - 5;
-    if (top < 0) { // не вылезать за верхнюю границу окна
+    if (top < 0) {
         top = coords.top + target.offsetHeight + 5;
     }
 
@@ -409,7 +406,11 @@ const cell = (e) => {
 }
 
 
-// 1 странность ввода по ячейкам иногда
+// Features for integrate
+//  reset button
+//  clock - circle
+//  change language
+//  save results
+//  pick cell for input by mouse
 
-// 2 сохранение результатов
-// 3 выбор ячейки в которую вводить(новая кнопка)
+// Bugs

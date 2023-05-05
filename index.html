@@ -8,14 +8,14 @@
 </head>
 
 <body>
-	<h1 class="title">Time Counter</h1>
+	<h1 class="title">TIME COUNTER</h1>
 	<div class="container">
 		<table class="table">
 			<tr>
-				<td id="na4" data-tooltip="Время начала работы">Время начала</td>
-				<td id="konec" data-tooltip="Время окончания работы">Время окончания</td>
-				<td id="resu" data-tooltip="Посчитанное чистое время работы">Результат</td>
-				<td id="resuMin" data-tooltip="Результат подсчета в минутах">Минуты</td>
+				<td id="na4" data-tooltip="Start time (Hours)">Start time</td>
+				<td id="konec" data-tooltip="End time (Hours)">End time</td>
+				<td id="resu" data-tooltip="Counted result time (Hours)">Result</td>
+				<td id="resuMin" data-tooltip="Result in minutes">Minutes</td>
 			</tr>
 			<tr>
 				<td id="0"></td>
@@ -169,7 +169,7 @@
 				<td id="134"></td>
 			</tr>
 			<tr>
-				<td id="" color="black" colspan='2'>Общее время</td>
+				<td id="" color="black" colspan='2'>Total time</td>
 				<td id="itog"></td>
 				<td id="itogMin"></td>
 			</tr>
@@ -177,24 +177,25 @@
 		<div class="handlers">
 			<div class="forms">
 				<form id="form">
-					<input type="text" id="timeInput" placeholder="00.00" autofocus>
-					<input type="button" data-tooltip="Укажите время начала работы" id="fire" value="Вр. начала">
-					<input type="text" id="timeInput1" placeholder="00.00">
-					<input type="button" data-tooltip="Укажите время <br>окончания работы" id="fire1"
-						value="Вр. окончания">
+					<input type="text" id="timeInput" class="input" data-tooltip="Set start time" placeholder="00.00" autofocus>
+					<input type="button" id="fire" class="inputButton" value="Start time">
+					<input type="text" id="timeInput1" class="input" data-tooltip="Set start time" placeholder="00.00">
+					<input type="button" id="fire1" class="inputButton"	value="End time">
 				</form>
 				<form id="form1">
-					<input type="text" id="timeInput2" placeholder="00.00">
-					<input type="button" data-tooltip="Укажите чистое <br>время работы" id="fire2" value="Результат">
-					<input type="button" data-tooltip="Формы ввода вверху" id="zapuskButtUp" value="▲">
-					<input type="button" data-tooltip="Формы <br>ввода внизу" id="zapuskButtDown" value="▼">
+					<input type="text" id="timeInput2" class="input" placeholder="00.00" data-tooltip="Set result time">
+					<input type="button" id="fire2" class="inputButton" value="Result">
+					<input type="button" id="zapuskButtUp" data-tooltip="Input forms to top" value="▲">
+					<input type="button" id="zapuskButtDown" data-tooltip="Input forms to bottom" value="▼">
 				</form>
 			</div>
-            <div class="messageArea">
-                <div id="messageArea"></div>
-                <div id="messageAreaMin"></div>
-            </div>
-            <span class="time">00:00</span>
+			<div class="informUser">
+				<div class="messageArea">
+					<div id="messageArea"></div>
+					<div id="messageAreaMin"></div>
+				</div>
+				<div class="time">00:00</div>
+			</div>
 			<!-- <div class="producedBy">by AoD & Foxonom</div> -->
 		</div>
 	</div>
