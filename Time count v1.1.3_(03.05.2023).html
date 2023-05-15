@@ -524,7 +524,6 @@ function fResult() {
     var c22 = document.getElementById(103).innerHTML;
     var c23 = document.getElementById(104).innerHTML;
 
-    var h = 0, m = 0;
     var hs0 = parseInt(c0) * 3600;
     var hs1 = parseInt(c1) * 3600;
     var hs2 = parseInt(c2) * 3600;
@@ -577,6 +576,8 @@ function fResult() {
 
     var res = (hs0 + hs1 + hs2 + hs3 + hs4 + hs5 + hs6 + hs7 + hs8 + hs9 + hs10 + hs11 + hs12 + hs13 + hs14 + hs15 + hs16 + hs17 + hs18 + hs19 + hs20 + hs21 + hs22 + hs23) + (ms0 + ms1 + ms2 + ms3 + ms4 + ms5 + ms6 + ms7 + ms8 + ms9 + ms10 + ms11 + ms12 + ms13 + ms14 + ms15 + ms16 + ms17 + ms18 + ms19 + ms20 + ms21 + ms22 + ms23);
 
+	var h = 0, m = 0;
+
     resultMin = (res / 60);
     while (res >= 3600) {
         h++;
@@ -585,9 +586,12 @@ function fResult() {
     if (res < 3600) {
         m = (res / 60) / 100;
     }
+	
     result = Math.round((h + m) * 100) / 100;
+
     document.getElementById('itog').innerHTML = result;
     document.getElementById('itogMin').innerHTML = resultMin;
+
     view();
 };
 
