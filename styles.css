@@ -93,15 +93,16 @@ div#messageArea, div#messageAreaMin{
 
 
 .time{
-    min-width: 140px;
-    max-height: 40px;
+    min-width: 100px;
+    min-height: 100px;
     margin-right: 10px;
+    padding-top: 30px;
     color: #ffffff;
     opacity: 70%;
     text-align: center;
     font-weight: bold;
     font-size: xx-large;
-    border-radius: 10px;
+    border-radius: 50%;
     background:rgb(30, 144, 255);
     box-shadow: dodgerblue 0px 0px 10px 3px;
 }

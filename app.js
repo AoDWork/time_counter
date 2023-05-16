@@ -54,7 +54,8 @@ function getTime() {
     let minutes = date.getMinutes()
     let seconds = date.getSeconds()
 
-    timeElement.innerText = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds)
+    timeElement.innerText = addZero(hours) + ":" + addZero(minutes) 
+    //+ ":" + addZero(seconds)
 }
 
 
@@ -65,6 +66,7 @@ function onClickButtonDown() {
     document.querySelector(".messageArea").classList.add("messageMarginOnBottom")
 
 };
+
 function onClickButtonUp() {
     document.querySelector('.handlers').classList.remove("reverseColumn")
     document.querySelector(".forms").classList.remove("formsMargins")
@@ -276,6 +278,9 @@ function countAllResults() {
         summOfHours = summOfHours - 60;
     }
 
+    if (summOfHours < 10) {
+        summOfHours = '0' + summOfHours
+    }
 
     let totalHours = (counterHours +'.'+ summOfHours)
     document.getElementById('itog').innerText = totalHours;
