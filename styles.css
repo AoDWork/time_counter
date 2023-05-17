@@ -119,11 +119,16 @@ div#messageArea, div#messageAreaMin {
 
 .clock__switch {
     position: absolute;
-    width: 10px;
-    height: 10px;
-    right: 10px;
+    width: 30px;
+    height: 30px;
+    right: 0px;
     top: 5px;
-    background: red;
+    background: #DCDCDC;
+    background-image: url('./clock_2.png');
+    background-size: cover;
+    background-position: center;
+    border: 0;
+    border-radius: 50%;
 }
 
 
