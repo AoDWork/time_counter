@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 
 <head>
 	<meta charset="UTF-8">
@@ -177,24 +177,28 @@
 		<div class="handlers">
 			<div class="forms">
 				<form id="form">
-					<input type="text" id="timeInput" class="input" data-tooltip="Set start time" placeholder="00.00" autofocus>
+					<input type="text" id="timeInput" class="input" data-tooltip="Set start time" placeholder="00.00"
+						autofocus>
 					<input type="button" id="fire" class="inputButton" value="Start time">
 					<input type="text" id="timeInput1" class="input" data-tooltip="Set start time" placeholder="00.00">
-					<input type="button" id="fire1" class="inputButton"	value="End time">
+					<input type="button" id="fire1" class="inputButton" value="End time">
 				</form>
 				<form id="form1">
 					<input type="text" id="timeInput2" class="input" placeholder="00.00" data-tooltip="Set result time">
 					<input type="button" id="fire2" class="inputButton" value="Result">
-					<input type="button" id="zapuskButtUp" data-tooltip="Input forms to top" value="▲">
-					<input type="button" id="zapuskButtDown" data-tooltip="Input forms to bottom" value="▼">
+					<!-- <input type="button" id="zapuskButtUp" data-tooltip="Input forms to top" value="▲"> -->
+					<input type="button" id="formOnBotOrTop" data-tooltip="Input forms to bottom or to top" value="▼▲">
+					<input type="button" class="reset" data-tooltip="Reset all cells" value="Reset">
 				</form>
+				<!-- <form class="sideHandlers"></form> -->
 			</div>
 			<div class="informUser">
 				<div class="messageArea">
 					<div id="messageArea"></div>
 					<div id="messageAreaMin"></div>
 				</div>
-				<div class="time">00:00</div>
+				<div class="clock " data-tooltip="Local time">00:00</div>
+				<button class="clock__switch" data-tooltip="Change view of clock"></button>
 			</div>
 			<!-- <div class="producedBy">by AoD & Foxonom</div> -->
 		</div>

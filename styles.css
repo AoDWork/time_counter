@@ -25,7 +25,8 @@ body {
 
 .table {
     border-spacing: 2px;
-    background-color: rgb(30, 144, 255);;
+    background-color: rgb(30, 144, 255);
+    ;
 }
 
 td {
@@ -44,7 +45,7 @@ td {
     flex-direction: column;
 }
 
-.reverseColumn{
+.reverseColumn {
     flex-direction: column-reverse;
 }
 
@@ -52,7 +53,7 @@ td {
     margin-bottom: 38px;
 }
 
-.formsMargins{
+.formsMargins {
     margin-bottom: 0px;
     margin-top: 30px;
 }
@@ -69,49 +70,68 @@ input {
     font-size: 0.85rem;
 }
 
-.informUser{
+
+.informUser {
+    position: relative;
+    min-height: 110px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.messageArea{
+.messageArea {
     margin-left: 10px;
     /* margin-bottom: 30px; */
 }
 
-.messageMarginOnBottom{
+.messageMarginOnBottom {
     margin-bottom: 0px;
     /* margin-top: 30px; */
 }
 
-div#messageArea, div#messageAreaMin{
+div#messageArea, div#messageAreaMin {
     color: dodgerblue;
     font-weight: bold;
     font-size: xx-large;
 }
 
 
-.time{
+.clock {
     min-width: 100px;
-    min-height: 100px;
+    max-height: 40px;
     margin-right: 10px;
-    padding-top: 30px;
     color: #ffffff;
     opacity: 70%;
     text-align: center;
     font-weight: bold;
     font-size: xx-large;
-    border-radius: 50%;
-    background:rgb(30, 144, 255);
+    border-radius: 10px;
+    background: rgb(30, 144, 255);
     box-shadow: dodgerblue 0px 0px 10px 3px;
+}
+
+.circle {
+    min-height: 100px;
+    padding-top: 30px;
+    border-radius: 50%;
+    /* set background img */
+}
+
+.clock__switch {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    right: 10px;
+    top: 5px;
+    background: red;
 }
 
 
 .tooltip {
     position: fixed;
     padding: 10px 20px;
-    border: 2px solid rgb(30, 144, 255);;
+    border: 2px solid rgb(30, 144, 255);
+    ;
     border-radius: 5px;
     text-align: center;
     font: italic 14px/1.3 sans-serif;

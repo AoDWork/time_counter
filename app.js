@@ -1,4 +1,6 @@
 window.onload = init;
+
+
 var firstColumnPosition = 0;
 var secondColumnPosition = 50;
 var thirdColumnPosition = 80;
@@ -9,31 +11,27 @@ var resultMin = 0;
 var showingTooltip;
 var place = 70;
 
+
 // events on clicks
 function init() {
-    var fireButton = document.getElementById("fire");
-    fireButton.onclick = zapusk;
-
-    var fireButton1 = document.getElementById("fire1");
-    fireButton1.onclick = zapusk1;
-
-    var fireButton2 = document.getElementById("fire2");
-    fireButton2.onclick = zapusk2;
-
-    var zapuskButtDown = document.getElementById("zapuskButtDown");
-    zapuskButtDown.onclick = onClickButtonDown;
-
-    var zapuskButtUp = document.getElementById("zapuskButtUp");
-    zapuskButtUp.onclick = onClickButtonUp;
-
-    // bind onEnterPress on inputs fields 
-    timeInput.onkeypress = onEnterPress;
-    timeInput1.onkeypress = onEnterPress;
-    timeInput2.onkeypress = onEnterPress;
-
     setZero();
     countAllResults();
 };
+
+
+// add eventListeners
+document.getElementById("fire").addEventListener("click", zapusk)
+document.getElementById("fire1").addEventListener("click", zapusk1)
+document.getElementById("fire2").addEventListener("click", zapusk2)
+
+document.getElementById("formOnBotOrTop").addEventListener("click", moveFormsBotOrTop)
+document.querySelector(".reset").addEventListener("click", resetCells)
+document.querySelector(".clock__switch").addEventListener("click", clockSwith)
+
+// bind onEnterPress on inputs fields 
+document.getElementById("timeInput").addEventListener("keypress", onEnterPress)
+document.getElementById("timeInput1").addEventListener("keypress", onEnterPress)
+document.getElementById("timeInput2").addEventListener("keypress", onEnterPress)
 
 
 // Clock
@@ -47,42 +45,61 @@ const addZero = (time) => {
 }
 
 function getTime() {
-    const timeElement = document.querySelector('.time')
+    const timeElement = document.querySelector('.clock')
 
     let date = new Date
     let hours = date.getHours()
     let minutes = date.getMinutes()
     let seconds = date.getSeconds()
 
-    timeElement.innerText = addZero(hours) + ":" + addZero(minutes) 
-    //+ ":" + addZero(seconds)
+    const flatClock = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds)
+    const cirlceClock = addZero(hours) + ":" + addZero(minutes)
+
+    let clockViewChecker = document.querySelector('.clock').classList.contains('circle')
+
+    timeElement.innerText = clockViewChecker ? cirlceClock : flatClock
+}
+
+function clockSwith() {
+    let clock = document.querySelector('.clock');
+    clock.classList.toggle('circle')
 }
 
 
-// Shift inputs forms to bottom
-function onClickButtonDown() {
-    document.querySelector('.handlers').classList.add("reverseColumn")
-    document.querySelector(".forms").classList.add("formsMargins")
-    document.querySelector(".messageArea").classList.add("messageMarginOnBottom")
+// move input forms to bottom or to top 
+function moveFormsBotOrTop() {
+    document.querySelector('.handlers').classList.toggle("reverseColumn")
+    document.querySelector(".forms").classList.toggle("formsMargins")
+    document.querySelector(".messageArea").classList.toggle("messageMarginOnBottom")
 
 };
 
-function onClickButtonUp() {
-    document.querySelector('.handlers').classList.remove("reverseColumn")
-    document.querySelector(".forms").classList.remove("formsMargins")
-    document.querySelector(".messageArea").classList.remove("messageMarginOnBottom")
-};
+
+// reset cells
+function resetCells() {
+    firstColumnPosition = 0
+    secondColumnPosition = 50
+    thirdColumnPosition = 80
+    for (let x = 0; x < 25; x++) {
+        document.getElementById(0 + x).innerText = "";
+        document.getElementById(50 + x).innerText = "";
+        countAllResults();
+    }
+    setZero()
+}
 
 
 // enter button = click
 function onEnterPress(e) {
     let buttons = document.querySelectorAll(".inputButton");
+    console.log(e.target.id)
     let ind = (e.target.id).slice(9)
 
     if (ind == 0) {
         ind = 0
     }
     if (e.keyCode === 13) {
+        e.preventDefault();
         buttons[ind].click();
         return false;
     }
@@ -91,7 +108,7 @@ function onEnterPress(e) {
 
 // check valid input
 function IsValid(n) {
-    if (n.length > 5 || !(!isNaN(parseFloat(n)) && isFinite(n))  ) {
+    if (n.length > 5 || !(!isNaN(parseFloat(n)) && isFinite(n))) {
         alert("Input invalid or too long. Valid - 22.10 , max. length - 5 symbols");
         return false
     } else {
@@ -263,7 +280,7 @@ function countAllResults() {
     let arrMinutes = []
     let counterHours = 0
 
-    for (let i = 110; i <= 134; i++){ 
+    for (let i = 110; i <= 134; i++) {
         arrMinutes.push(document.getElementById(i).innerText)
     }
 
@@ -282,10 +299,10 @@ function countAllResults() {
         summOfHours = '0' + summOfHours
     }
 
-    let totalHours = (counterHours +'.'+ summOfHours)
+    let totalHours = (counterHours + '.' + summOfHours)
     document.getElementById('itog').innerText = totalHours;
     document.getElementById('itogMin').innerText = summOfMinutes;
-    
+
     view(totalHours, summOfMinutes);
 }
 
@@ -293,7 +310,7 @@ function countAllResults() {
 // show results 
 var view = function (totalHours, summOfMinutes) {
     var massageArea = document.getElementById("messageArea");
-    massageArea.innerText = "Hours : " + totalHours;
+    massageArea.innerText = "Hrs. : " + totalHours;
     var massageAreaMin = document.getElementById("messageAreaMin");
     massageAreaMin.innerText = "Min. : " + summOfMinutes;
 
@@ -333,22 +350,21 @@ document.onmouseover = function (e) {
     showingTooltip = tooltipElem;
 };
 
-document.onmouseout = function (e) {
-
+document.onmouseout = function () {
     if (showingTooltip) {
         document.body.removeChild(showingTooltip);
         showingTooltip = null;
     }
-
 };
 
 
 
-// Features for integrate
-//  reset button
-//  clock - circle
-//  change language
-//  save results
-//  pick cell for input by mouse
 
-// Bugs
+//! set background img on clock__switch
+
+//todo Features for integrate
+//  save results
+//  change language
+
+
+//! Bugs
