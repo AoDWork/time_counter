@@ -3,6 +3,8 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Time counter</title>
 	<link rel="stylesheet" href="./styles.css">
 </head>
@@ -28,7 +30,6 @@
 				<td id="51"></td>
 				<td id="81"></td>
 				<td id="111"></td>
-
 			</tr>
 			<tr>
 				<td id="2"></td>
@@ -176,17 +177,20 @@
 		</table>
 		<div class="handlers">
 			<div class="forms">
-				<form id="form">
+				<form>
 					<input type="text" id="timeInput" class="input" data-tooltip="Set start time" placeholder="00.00"
 						autofocus>
-					<input type="button" id="fire" class="inputButton" value="Start time">
-					<input type="text" id="timeInput1" class="input" data-tooltip="Set start time" placeholder="00.00">
-					<input type="button" id="fire1" class="inputButton" value="End time">
+					<input type="button" class="inputBtns inputButnFirstCol" value="Start time">
 				</form>
-				<form id="form1">
+				<form>
+					<input type="text" id="timeInput1" class="input" data-tooltip="Set end time" placeholder="00.00">
+					<input type="button" class="inputBtns inputButnSecondCol" value="End time">
+				</form>
+				<form>
 					<input type="text" id="timeInput2" class="input" placeholder="00.00" data-tooltip="Set result time">
-					<input type="button" id="fire2" class="inputButton" value="Result">
-					<!-- <input type="button" id="zapuskButtUp" data-tooltip="Input forms to top" value="▲"> -->
+					<input type="button" class="inputBtns inputButnThirdCol" value="Result">
+				</form>
+				<form>
 					<input type="button" id="formOnBotOrTop" data-tooltip="Input forms to bottom or to top" value="▼▲">
 					<input type="button" class="reset" data-tooltip="Reset all cells" value="Reset">
 				</form>
@@ -197,8 +201,10 @@
 					<div id="messageArea"></div>
 					<div id="messageAreaMin"></div>
 				</div>
-				<div class="clock " data-tooltip="Local time">00:00</div>
-				<button class="clock__switch" data-tooltip="Change view of clock"></button>
+				<div class="clock-block">
+					<div class="clock " data-tooltip="Local time">00:00</div>
+					<button class="clock__switch" data-tooltip="Change view of clock"></button>
+				</div>
 			</div>
 			<!-- <div class="producedBy">by AoD & Foxonom</div> -->
 		</div>
