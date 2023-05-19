@@ -9,6 +9,7 @@ let count = 0
 let result = 0
 let resultMin = 0
 let showingTooltip
+var clientWidth
 
 
 // events on initial
@@ -37,7 +38,8 @@ document.getElementById("timeInput2").addEventListener("keypress", onEnterPress)
 
 
 // Clock
-let intervalID = setInterval(getTime, 1000)
+let intervalClock = setInterval(getTime, 1000)
+let intervalClientwidth = setInterval(getClientWidth, 1000)
 
 const addZero = (time) => {
     if (time < 10) {
@@ -58,7 +60,7 @@ function getTime() {
     const cirlceClock = addZero(hours) + ":" + addZero(minutes)
 
     let clockViewChecker = document.querySelector('.clock').classList.contains('circle')
-
+    
     timeElement.innerText = clockViewChecker ? cirlceClock : flatClock
 }
 
@@ -68,11 +70,21 @@ function clockSwitch() {
 }
 
 
+// get client width of screen
+function getClientWidth() {
+    console.log(`in function` )
+    return clientWidth = document.documentElement.clientWidth
+}
+
 // move forms to bottom or to top 
 function moveFormsBotOrTop() {
-    document.querySelector('.handlers').classList.toggle("reverseColumn")
-    document.querySelector(".forms").classList.toggle("formsMargins")
-    document.querySelector(".messageArea").classList.toggle("messageMarginOnBottom")
+    if(clientWidth >= 550) {
+        document.querySelector('.handlers').classList.toggle("reverseColumn")
+        document.querySelector(".forms").classList.toggle("formsMargins")
+        document.querySelector(".messageArea").classList.toggle("messageMarginOnBottom")
+    } else {
+        document.querySelector('.container').classList.toggle("containerReverse")
+    }
 }
 
 
@@ -317,9 +329,8 @@ document.onmouseout = function () {
 
 
 
+
 //todo features for integrate
-// adapt to 420 px screens
-// tooltip for mobiles (not mouseover)
 // save settings of interface
 // change language
 // save results

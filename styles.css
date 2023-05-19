@@ -113,7 +113,7 @@ div#messageArea, div#messageAreaMin {
 /* Clock */
 .clock-block {
     position: relative;
-    min-width: 130px;min-width: 130px;
+    min-width: 130px;
     min-height: 110px;
     display: flex;
     justify-content: center;
@@ -149,7 +149,7 @@ div#messageArea, div#messageAreaMin {
     right: 15px;
     top: 5px;
     background: #DCDCDC;
-    background-image: url('./clock_3.png');
+    background-image: url('./clock_switch.png');
     background-size: cover;
     background-position: center;
     border: 0;
@@ -162,7 +162,6 @@ div#messageArea, div#messageAreaMin {
     position: fixed;
     padding: 10px 20px;
     border: 2px solid rgb(30, 144, 255);
-    ;
     border-radius: 5px;
     text-align: center;
     font: italic 14px/1.3 sans-serif;
@@ -259,6 +258,10 @@ div#messageArea, div#messageAreaMin {
         flex-direction: column-reverse;
     }
 
+    .containerReverse {
+        flex-direction: column;
+    }
+
     .forms {
         flex-direction: row;
         align-items: start;
@@ -290,8 +293,22 @@ div#messageArea, div#messageAreaMin {
 }
 
 
-@media (max-width: 420px) {
-    .forms {
-        flex-wrap: wrap;
+@media (max-width: 415px) {
+    .sideEffectButtons{
+        min-width: 200px;
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 375px) {
+    td {
+        min-width: 70px;
+    }
+    .clock-block{
+        min-width: 100px;
+    }
+    .clock {
+        margin: 0;
+        font-size: 26px;
     }
 }
