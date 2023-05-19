@@ -229,6 +229,10 @@ div#messageArea, div#messageAreaMin {
         min-width: 160px;
     }
 
+    .messageArea {
+        min-width: 180px;
+    }
+
     div#messageArea, div#messageAreaMin {
         font-size: 24px;
     }
@@ -280,11 +284,19 @@ div#messageArea, div#messageAreaMin {
     }
 
     .clock-block {
+        min-width: 100px;
         min-height: 0px;
     }
 
     .clock {
-        font-size: 32px;
+        font-size: 26px;
+        margin: 0;
+    }
+
+    .circle {
+        min-height: 90px;
+        padding-top: 30px;
+        border-radius: 50%;
     }
 
     .clock__switch {
@@ -300,15 +312,23 @@ div#messageArea, div#messageAreaMin {
     }
 }
 
+
 @media (max-width: 375px) {
     td {
         min-width: 70px;
     }
-    .clock-block{
-        min-width: 100px;
+
+    .clock-block {
+        min-width: 80px;
     }
+
     .clock {
-        margin: 0;
-        font-size: 26px;
+        min-width: 80px;
+    }
+
+    .circle {
+        min-height: 80px;
+        padding-top: 25px;
+        border-radius: 50%;
     }
 }

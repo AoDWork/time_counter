@@ -37,10 +37,11 @@ document.getElementById("timeInput1").addEventListener("keypress", onEnterPress)
 document.getElementById("timeInput2").addEventListener("keypress", onEnterPress)
 
 
-// Clock
 let intervalClock = setInterval(getTime, 1000)
 let intervalClientwidth = setInterval(getClientWidth, 1000)
 
+
+// Clock
 const addZero = (time) => {
     if (time < 10) {
         time = "0" + time
@@ -56,7 +57,9 @@ function getTime() {
     let minutes = date.getMinutes()
     let seconds = date.getSeconds()
 
-    const flatClock = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds)
+    const flatClock = (clientWidth > 375) ? addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds)
+                                            : addZero(hours) + ":" + addZero(minutes)
+    
     const cirlceClock = addZero(hours) + ":" + addZero(minutes)
 
     let clockViewChecker = document.querySelector('.clock').classList.contains('circle')
